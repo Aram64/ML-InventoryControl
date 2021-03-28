@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ACM MLI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="Images/logoicon.ico">
+    <link rel="stylesheet" href="Webpage.css">
+    <!---Icon Library-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--W3ContainerClass-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+    <body>
+<!----------------------------------------------------------------------------------->
+      <!--(Title of Project/Header)-->
+      <div class="header">
+        <h1>Inventory Management System</h1>
+        <p>By: Aram Flores, Christian Narcia, Miguel Padilla</p>
+      </div>
+<!----------------------------------------------------------------------------------->
+      <!--(Navigation Bar)-->
+        <div class="w3-bar w3-black ">
+          <button class="w3-bar-item w3-button tablink w3-padding-large w3-red fa fa-fw fa-home"onclick="openCity(event,'Tab1')"> Home</button>
+          <button class="w3-bar-item w3-button tablink w3-padding-large fa fa-fw fa-book" onclick="openCity(event,'Tab2')"> About Us</button>
+          <button class="w3-bar-item w3-button tablink w3-padding-large fa fa-fw fa-envelope" onclick="openCity(event,'Tab3')"> Contact</button>
+          <button class="w3-bar-item w3-button tablink w3-padding-large fa fa-fw fa-search" onclick="openCity(event,'Tab4')"> Search</button>
+          <button id="loginBtn" class="w3-bar-item w3-button w3-padding-large w3-right tablink fa fa-fw fa-user open-button" onclick="loginfun()"> Login</button>
+          <button id="signupBtn" class="w3-bar-item w3-button w3-padding-large w3-right tablink fa fa-fw fa-user open-button" onclick="signupfun()"> Sign Up</button>
+        </div>
+        <!--<span onclick="this.parentElement.style.display='none'" class="w3-button w3-large w3-display-right">&times;</span> (adds an x box to hide the box but makes it seem as if its deleted)-->
+        <!--Tab1------------------------------------------------------------------------------------------>
+        <div id="Tab1" class="w3-container w3-border city">
+            <div class="row">
+
+              <!--(Main Summary)-->
+              <div class="main">
+                <h2>Project Overview</h2>
+                <!--<h5>January 11th, 2020</h5>-->
+                <p>This is a ML-based inventory control system that uses object recognition using image processing. An embedded system equipped with a camera is used to capture and recognize objects to feed into an inventory database in the cloud. Users access the front-end website of the inventory system for related functions such as the state of inventory and ordering. Notifications are issued if an object goes missing without proper processing.</p>
+              </div>
+              <!--SliderShow-->
+              <div class="side">
+                <img class = "mainimg" src="Images/SystemDiagramIMS.png">
+              </div>
+
+            </div>
+        </div>
+        <!--Tab2------------------------------------------------------------------------------------------>
+        <div id="Tab2" class="w3-container w3-border city" style="display:none">
+          <div class="main">
+            <h1>About Us</h1>
+              <h5>Our team explores and expands into facilitating the system of Inventory Control along with Machine Learning. Where one can manage a cost efficient, and flexible business system. 
+              Where we apply different disciplines to create an Inventory Management System with Machine Learning.</h5>
+              <br>
+              <h2>Contributions:</h2>
+              <h5><b>Aram Flores:</b></h5>Linux Administrator, AWS Administrator, Machine Learning discipline.
+              <br>
+              Languages: Python, HTML, CSS, SQL, JSON.
+              <br>
+              <h5><b>Christian Narcia:</b></h5> Machine Learning discipline, Web Developer.
+              <br>
+              Languages: Python, HTML, CSS, JavaScript, SQL, JSON.
+              <br>
+              <h5><b>Miguel Padilla:</b></h5> Web Developer & Web Designer.
+              <br>
+              Languages: HTML, CSS, JavaScript, JSON, SQL.
+              <br>
+              <h5><b>Dr. Fitratullah Khan:</b></h5> Advisor
+
+          </div>
+        </div>
+
+        <!--Tab3------------------------------------------------------------------------------------------>
+        <div id="Tab3" class="w3-container w3-border city" style="display:none">
+          
+          <div id="contact" class="w3-container">
+            <h1>Contact Us:</h1>
+            
+            <p class="w3-text-blue-grey w3-large">
+            <p>You can email us at <b>ACMSeniorProjectUTRGV@gmail.com</b> for bussiness inquiries or private concerns.</p>
+            <!--
+            <form action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
+            <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
+            <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
+            </form>
+            -->
+            </div>
+        </div>
+        <!--Tab4------------------------------------------------------------------------------------------>
+        <div id="Tab4" class="w3-container w3-border city" style="display:none">
+          <h2 style="text-align: center;">List of Items Available</h2>
+          <!--Img TABLE-->
+          <table class ="itemTable">
+            <tr> 
+              <td><img class="img2" src="Images/imageplaceholder.png">
+              <br>
+              <span>Item 1</span></td>
+              <td><img class="img2" src="Images/imageplaceholder.png">
+                <br>
+                <span>Item 2</span></td>
+              <td><img class="img2" src="Images/imageplaceholder.png">
+                <br>
+                <span>Item 3</span></td>
+              
+            </tr>
+
+            <tr>
+              <td><img class="img2" src="Images/imageplaceholder.png">
+                <br>
+                <span>Item 4</span></td>
+                <td><img class="img2" src="Images/imageplaceholder.png">
+                  <br>
+                  <span>Item 5</span></td>
+                <td><img class="img2" src="Images/imageplaceholder.png">
+                  <br>
+                  <span>Item 6</span></td>
+            </tr>
+            <tr>
+              <td><img class="img2" src="Images/imageplaceholder.png">
+                <br>
+                <span>Item 7</span></td>
+                <td><img class="img2" src="Images/imageplaceholder.png">
+                  <br>
+                  <span>Item 8</span></td>
+                <td><img class="img2" src="Images/imageplaceholder.png">
+                  <br>
+                  <span>Item 9</span></td>
+            </tr>
+            
+            </table>
+
+        </div>
+        <!--Tab5------------------------------------------------------------------------------------------>
+        <div id="myBtn" class="w3-container w3-border city" style="display:none">
+
+        </div>
+
+<!-- The Modal -->
+
+<div id="loginModal" class="modal">
+
+  <!-- Modal login content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <!--action="Website Client 0_4/ClientGUI.html"
+    required-->
+    <form method = "post" action="login.php">
+    <h2>Login</h2><br>
+
+    <label for="email">Email:</label><br>
+    <input name = "email" id="email_LI" type="email" required
+             placeholder="me@example.com"><br><br>
+
+
+    <label for="password">Password:</label><br>
+    <input name = "password" id="password_LI" type="password" required><br><br>
+
+    
+    <button onclick = "LC()" type="submit" class="w3-button w3-light-grey w3-padding-large w3-right tablink fa fa-user">Login</button>
+
+
+    </form>
+  </div>
+ 
+</div>
+
+<!-------------Modal signup content---------->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <!--<span class="close">&times;</span>-->
+    <!--action="signup.php"-->
+    <form method = "post" action="signup.php">
+      <h2>Sign Up</h2><br>
+
+      <label for="username">User Name:</label><br>
+      <input name = "username" id="username_SU" type="text" required><br><br>
+  
+      <label for="email">Email:</label><br>
+      <input name = "email" id="email_SU" type="email" required
+               placeholder="me@example.com"><br><br>
+  
+      <label  for="Confirmemail">Confirm Email:</label><br>
+      <input name = "Cemail" id="email_CSU" type="email" required><br><br>
+  
+      <label for="password">Password:</label><br>
+      <input name = "password" id="password_SU" type="password" required><br><br>
+  
+      <label  for="Confirmpassword">Confirm Password:</label>
+      <input name = "Cpassword" id="password_CSU" type="password" required><br><br>
+  
+      <button onclick = "SC()" type="submit" class="w3-button w3-red w3-padding-large w3-right tablink fa fa-user">Sign up</button>
+
+
+    </form>
+  </div>
+
+</div>
+
+ <script src = "script.js"></script>
+
+
+      <!--NavbarScript_for_cycling_tabs------------------------------------------------------------------------------------------>
+      <script>
+        function openCity(evt, cityName) {
+          var i, x, tablinks;
+          x = document.getElementsByClassName("city");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+          }
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " w3-red";
+        }
+        </script>
+
+<!-----------------------------------fa-copyright------------------------------------------------>  
+
+      <!--(Footer)-->
+      <div class="footer">
+        <h3 class = "fa "> ACM Senior Project </h3>
+      </div>
+
+    </body>
+</html>
