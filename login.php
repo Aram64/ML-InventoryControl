@@ -10,10 +10,10 @@
 
     
     //Creating Servername variable
-    $dbservername = "acmdatabase-1.chkb77we6hez.us-east-2.rds.amazonaws.com";
-    $dbusername = "Aram64";
-    $dbpassword = "Diplo135";
-    $dbname = "inventoryManagement";
+    $dbservername = "";
+    $dbusername = "";
+    $dbpassword = "";
+    $dbname = "";
 
     //create connection
     $conn = new mysqli( $dbservername, $dbusername, $dbpassword, $dbname);
@@ -22,33 +22,34 @@
         die("Connection failed:".$conn->connect_error);
     }
 
-    //if($email = ''){
-        //grabs username from database
-    //    $username = 
-    //}
-
-    $sql = "SELECT username from accounts where email = '$email' and accountKey = '$pwd'";
+    /////////////////////////
+    // creates account key
+    $sql = "SELECT passwordSalt from accounts where email = '$email'";
     $result = $conn->query($sql);
-    $clientName = $result->fetch_array()[0] ?? '';
-    if($clientName != ""){
-        $_SESSION['clientName'] = $clientName;
+    $salt = $result->fetch_array()[0] ?? '';
+    if($salt != ""){
+        $pwd2 = $salt . $pwd;
+        ///// hashes pwd
+        $accKey = hash('sha256', $pwd2);
+     
+        ///////////////////////////////
+        $sql = "SELECT username from accounts where email = '$email' and accountKey = '$accKey'";
+        $result = $conn->query($sql);
+        $clientName = $result->fetch_array()[0] ?? '';
+        if($clientName != ""){
+            $_SESSION['clientName'] = $clientName;
+        }
+        mysqli_close($conn);
     }
-    mysqli_close($conn);
 
     //checks if valid login
     if("admin@admin.com" == $email && isset($_SESSION['clientName'])){
-        header("location: Website Admin_0_2/AdminGUI.php");
+        header("location: Website Admin_0_2/tabledata.php");
     }else if(isset($_SESSION['clientName'])){
-        header("location: Website Client 0_4/ClientGUI.php");
+        header("location: Website Client 0_4/tabledata.php");
         exit();
     }else{
         header("location:index.html");
     }
 
-
-    //session_status()
-    //$_SESSION['pname']
-
-
-    //session_destroy()
 ?>

@@ -35,10 +35,21 @@ function SC(){
   var email_CSU = document.getElementById("email_CSU").value;
   var password_SU = document.getElementById("password_SU").value;
   var password_CSU = document.getElementById("password_CSU").value;
-  console.log(username_SU + ", " + email_SU + ", " + email_CSU + ", " + password_SU + ", " + password_CSU);
-  alert(username_SU + ", " + email_SU + ", " + email_CSU + ", " + password_SU + ", " + password_CSU)
+
+  if(email_CSU != email_SU){
+    alert("Emails are not the same!");
+    clearRecord();
+  }else if(password_CSU != password_SU){
+    alert("Passwords are not the same!");
+  }else{print ('hi');
+    //$.ajax({
+     // type: "GET",
+     // url: "signup.php"});
+  }
+  //console.log(username_SU + ", " + email_SU + ", " + email_CSU + ", " + password_SU + ", " + password_CSU);
+  //alert(username_SU + ", " + email_SU + ", " + email_CSU + ", " + password_SU + ", " + password_CSU)
 }
-  
+function clearRecord() { location.href = 'signup.php'; } 
 
 //<!---login modal-->
 
@@ -72,7 +83,7 @@ function loginfun(){
     }
   }
 }
-//login input
+
 function LC(){
   var email_LI = document.getElementById("email_LI").value;
   var password_LI = document.getElementById("password_LI").value;

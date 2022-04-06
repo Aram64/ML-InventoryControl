@@ -1,56 +1,62 @@
 <?php
     session_start();
-    $username = $_POST['username']
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $Cemail = $_POST['Cemail'];
     $pwd = $_POST['password'];
     $Cpwd = $_POST['Cpassword'];
 
-    if($email != $Cemail){
-        echo '<script>alert("Email is not the same!")</script>'; 
-    }else if($pwd != $Cpwd){
-        echo '<script>alert("Passwords are not the same!")</script>';
+    
+    $dbservername = "";
+    $dbusername = "";
+    $dbpassword = "";
+    $dbname = "";
+
+    //create connection
+    $conn = new mysqli( $dbservername, $dbusername, $dbpassword, $dbname);
+    //check connectin
+    if($conn -> connect_error){
+        die("Connection failed:".$conn->connect_error);
+    }
+    //checks if username exists
+    $sql = "SELECT * from accounts where username = '$username'";
+    $result = $conn->query($sql);
+    $usernamech = $result->fetch_array()[0] ?? '';
+    //check if username exists
+    $sql = "SELECT * from accounts where email = '$email'";
+    $result = $conn->query($sql);
+    $emailch = $result->fetch_array()[0] ?? '';
+    if("" != $usernamech){
+        header("location:index.html");
+    }else if($emailch != ""){
+        header("location:index.html");
     }else{
-        $dbservername = "acmdatabase-1.chkb77we6hez.us-east-2.rds.amazonaws.com";
-        $dbusername = "Aram64";
-        $dbpassword = "Diplo135";
-        $dbname = "inventoryManagement";
-
-        //create connection
-        $conn = new mysqli( $dbservername, $dbusername, $dbpassword, $dbname);
-        //check connectin
-        if($conn -> connect_error){
-            die("Connection failed:".$conn->connect_error);
-        }
+        /////////creates salt string
+        function rand_string( $length ) {
+        $salt="";
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$&*";  
+        $size = strlen( $chars );  
+        //echo "Random string ="; 
         
-        $sql = "SELECT username from accounts where email = '$email'";
-        $result = $conn->query($sql);
-        $username = $result->fetch_array()[0] ?? '';
-        if(username != ""){
-            echo '<script>alert("Username taken!")</script>';
+        for( $i = 0; $i < $length; $i++ ) 
+        {  
+        $str= $chars[ rand( 0, $size - 1 ) ];  
+        $salt .= $str;
+        }  
+        return $salt; 
         }
-
-        mysqli_close($conn);
-        /*
-        //checks if valid login
-        if(('admin@admin.com' == $email) && (isset($_SESSION['clientName']))){
-            header("location: Website Admin_0_2/AdminGUI.php");
-        }else if(isset($_SESSION['clientName']){
-            header("location: Website Client 0_4/ClientGUI.php");
-            exit();
-        }else{
-            header("location:index.html");
-        }
-
+        $salt1 = rand_string(125);
+        ///adds salt to pwd
+        $pwd2 = $salt1 . $pwd;
+        ///// hashes pwd
+        $accKey = hash('sha256', $pwd2);
         
-        $sql = "SELECT username from accounts where email = '$email' and accountKey = '$pwd'";
-        $result = $conn->query($sql);
-        $clientName = $result->fetch_array()[0] ?? '';
-        if($clientName != ""){
-            $_SESSION['clientName'] = $clientName;
-        } */
-
+        $sql = "insert into accounts values('$username', '$accKey', '$email', '$salt1')";
+        $conn->query($sql);
+        $_SESSION['clientName'] = $username;
+        header("location:Website Client 0_4/tabledata.php");
     }
 
+    mysqli_close($conn);
     
 ?>
